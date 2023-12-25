@@ -1,0 +1,178 @@
+
+<section class="intro">
+  <br>
+  <div style="display: flex; justify-content: space-between;">
+    <div >
+      <button  type="button" class="btn btn-dark" style="margin-left: 50px;"  (click)="showForm()">change Infor</button>
+    </div>
+    <div >
+      <button  type="button" class="btn btn-dark" style="margin-left: 50px;" (click)="Logout()">Log Out</button>
+    </div>
+    <div style="margin-right: 100px;">
+      <input [(ngModel)]="sreachName"   placeholder="Search name">
+    </div>
+  </div>
+  <br>
+  <div class="bg-image h-100" style="background-color: #f5f7fa;">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body p-0">
+                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative;">
+                  <table class="table table-striped mb-0">
+                    <thead style="background-color: #002d72;" class="sticky">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Task</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Date-begin</th>
+                        <th scope="col">Date-end</th>
+                        <th scope="col">Note</th>
+                        <th scope="col">Button</th>
+                        <th> <button type="button" class="btn btn-light"
+                          style=" right: 1000px;"
+                          (click)="addFeild()">Addnew</button>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-group-divider" *ngFor="let item of user |filter:sreachName|paginate: { itemsPerPage: 5, currentPage: p };let i = index">
+                      <tr>
+                        <td >
+                          <div style="text-align:left;">
+                           {{i+1}}
+                        </div>
+                      </td>
+                      <td>
+                        <div *ngIf="item.isEdit == true">
+                          <input type="text" [(ngModel)]="item.Task" class="form-control" name="task">
+                        </div>
+                        <div *ngIf="!item.isEdit">
+                          {{item.Task}}
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <select name="status"  *ngIf="item.isEdit == true" [(ngModel)]="item.Status" class="form-select" aria-label="Default select example">
+                            <option type="text" [value]="selectoption"> on-going</option>
+                            <option  type="text" [value]="selectoption2"> done</option>
+                          </select>
+                            <div *ngIf="!item.isEdit"><p>{{item.Status}}</p></div>
+                        </div>
+                      </td>
+                      <td>
+                        <div *ngIf="item.isEdit == true">
+                          <input type="date" [(ngModel)]="item.Datebegin" (ngModelChange)="validateDate($event)" class="form-control" name="datebegin">
+                        </div>
+                        <div *ngIf="!item.isEdit">
+                          {{item.Datebegin | date}}
+                        </div>
+                      </td>
+                      <td >
+                        <div *ngIf="item.isEdit == true" >
+                          <input type="date" [(ngModel)]="item.DateEnd" (ngModelChange)="validateDate($event)" class="form-control" name="dateend" >
+                        </div>
+                        <div *ngIf="!item.isEdit" [ngStyle]="{'color':item.ishighlight?'red':''}">
+                          {{item.DateEnd | date}}
+                        </div>
+                      </td>
+                      <td>
+                        <div *ngIf="item.isEdit == true">
+                          <input type="text" [(ngModel)]="item.Note" class="form-control" name="note">
+                        </div>
+                        <div *ngIf="!item.isEdit">
+                          {{item.Note}}
+                        </div>
+                      </td>
+                      <td>
+                        <div *ngIf="item.isEdit">
+                          <button class="btn btn-sm btn-success" (click)="Update(item)">Update</button>
+                          <hr>
+                          <button class="btn btn-sm btn-success" (click)="Cancel(item)">cancel</button>
+                          </div>
+                        <div *ngIf="!item.isEdit">
+                        <button class="btn btn-sm btn-success" (click)="onEdit(item)">Modify</button>
+                          <hr>
+                        <button class="btn btn-sm btn-success" (click)="delTable(item.Id)">Delete</button>
+                        </div>
+                        <hr>
+                        <div *ngIf="item.isEdit">
+                          <button [disabled]="!Datecheck" class="btn btn-sm btn-success" (click)="Create(item)">save</button>
+                        </div>
+                      </td>
+                      <td >
+                        <div >
+                        <input *ngIf="hideSoTT == true" type="text" [(ngModel)]="item.SoTT" class="form-control"  name="SoTT" >
+                      </div>
+                      <td >
+                        <div >
+                        <input *ngIf="hideSoTT == true" type="text" [(ngModel)]="item.Id" class="form-control"  name="Id" >
+                      </div>
+
+                    </td>
+                    </tr>
+                  </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+
+
+  <!-- ----Form hidden--- -->
+  <div style="margin-left: 80%;">
+    <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
+  </div>
+  <br>
+  <div>
+    <div id="myA" style=" position: fixed; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(0,0,0,0.5); z-index: 2;" *ngIf="isFormshow">
+      <div class="bigdiv">
+        <div class="div1">
+          <div class="div1A" >
+            <p class="p-1" id="">
+              <span style="font-size: 25px; font-weight: 70"
+                >Change Email && UserName</span
+              >
+            </p>
+          </div>
+        </div>
+        <div class="div2">
+          <div class="form-group pt-3">
+            <div class="input-field">
+              <div>
+                <input type="text" [(ngModel)]="inputName" (ngModelChange)="checkvalidName($event);checkdirtyName = true" placeholder="name" class="form-control form-control-lg" name="name" id="name"/>
+                  <small *ngIf="!checkvalidateName && checkdirtyName" style="color: rgba(255, 0, 0, 0.611);">Invalid Name</small>
+              </div>
+              <br>
+              <div>
+                <input type="text" [(ngModel)]="inputEmail" (ngModelChange)="checkValidEmail($event);checkdirtyEmail = true" placeholder="email"  class="form-control form-control-lg" name="email" id="email"/>
+                  <small *ngIf="!checkvalidateEmail && checkdirtyEmail" style="color: rgba(255, 0, 0, 0.498);">Invalid Email</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div  class="div3">
+          <div class="div3A">
+          <button
+            id="closeBtn"
+            class="btn btn-secondary"
+            (click)="showForm()"
+          >
+            Close
+          </button>
+          <button type="button" (click)="UserNameAndEmail()" class="btn btn-primary">send</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+</section>

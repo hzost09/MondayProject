@@ -1,0 +1,139 @@
+
+<div>
+  <section class="vh-100 gradient-custom">
+    <form action="" >
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-dark text-white" style="border-radius: 1rem;">
+            <div><a href="/" style="margin-left: 10px; margin-top: 10px; color: aliceblue;"> back to page</a></div>
+            <div class="card-body p-5 text-center">
+
+              <div class="mb-md-5 mt-md-4 pb-5">
+
+                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                <p class="text-white-50 mb-5">Please enter your login, email, password!</p>
+
+                <div class="form-outline form-white mb-4">
+                  <label for="username" class="form-label">User Name</label>
+                  <input
+                    type="username "
+                    class="form-control"
+                    id="username"
+                    name="username"
+                    [(ngModel)]="UserName"
+                    (ngModelChange)="checkvalidName($event)"
+                    />
+                  <small
+                    *ngIf="
+                      !errors
+                    "
+                    class="text-danger"
+                    >{{errorMessage}}</small
+                  >
+                </div>
+
+                <div  class="form-outline form-white mb-4">
+                  <label for="email" class="form-label">Email address</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                  [(ngModel)]="Email"
+                  (ngModelChange)="checkValidEmail($event)"
+                  />
+
+                  <small
+                    *ngIf="
+                      !errorsEmail
+                    "
+                    class="text-danger"
+                    >{{errorMessageEmail}}</small
+                  >
+                  <small type="text"></small>
+                </div>
+
+                <div lass="form-outline form-white mb-4">
+                  <label for="password" class="form-label">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    name="password"
+                    [(ngModel)]="Password"
+                    (ngModelChange)=" checkvalidatePassword($event)"
+                  />
+                  <small
+                    *ngIf="
+                      !errorsPassword
+                    "
+                    class="text-danger"
+                    >{{errorMessagePassword}}</small
+                  >
+                </div>
+
+                <br>
+                <button  type="button" class="btn btn-outline-light btn-lg px-5" (click)="onLogin()">
+                  Submit
+                </button>
+                <br>
+                <br>
+                  <button (click)="showForm()" id="myButton" class="btn btn-outline-light btn-lg px-5">Reset Password</button>
+
+
+              </div>
+
+              <div>
+                <p class="mb-0">Don't have an account? <a href="/signup" class="text-white-50 fw-bold">Sign Up</a>
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  </section>
+
+
+<!-- reset password -->
+
+<div id="myA" style=" position: fixed; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(0,0,0,0.5); z-index: 2;" *ngIf="isFormshow">
+  <div class="bigdiv">
+    <div class="div1">
+      <div class="div1A" >
+        <p class="p-1" id="">
+          <span style="font-size: 25px; font-weight: 70"
+            >Forget your password?</span
+          >
+          <br />
+          <small>provide mail</small>
+        </p>
+      </div>
+    </div>
+    <div class="div2">
+      <div class="form-group pt-3">
+        <div class="input-field">
+          <input type="text" [(ngModel)]="inputData" placeholder="email"  class="form-control form-control-lg" />
+        </div>
+      </div>
+    </div>
+    <br>
+    <div  class="div3">
+      <div class="div3A">
+      <button
+        id="closeBtn"
+        class="btn btn-secondary"
+        (click)="showForm()"
+      >
+        Close
+      </button>
+      <button type="submit" (click)="SendEmaillink(inputData)"  class="btn btn-primary">send</button>
+    </div>
+    </div>
+  </div>
+</div>
+
+

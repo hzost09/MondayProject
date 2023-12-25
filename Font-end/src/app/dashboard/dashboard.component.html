@@ -1,0 +1,56 @@
+<div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent"  style="display: flex; justify-content: space-between;">
+        <div >
+          <button  type="button" class="btn btn-dark" style="margin-left: 50px;" (click)="loggingOut()">LogOut</button>
+        </div>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="sreachName"  name="name">
+        </form>
+      </div>
+    </div>
+  </nav>
+</div>
+<section class="intro">
+  <div class="gradient-custom h-100">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div id="datatable">
+
+              <table class="table table-striped table-hover">
+                <thead>
+                 <tr>
+               <th>#</th>
+               <th>Name</th>
+               <th>Email</th>
+               <th>Role</th>
+               <th>Status</th>
+               <th>del</th>
+
+               </tr>
+              </thead>
+               <ng-container *ngFor="let item of users|paginate: { itemsPerPage: 5, currentPage: p} | filter:sreachName ; let i = index">
+                 <tr *ngIf="item.role == 'User'">
+                     <td>{{i+1}}</td>
+                     <td>{{item.userName}}</td>
+                     <td>{{item.email}}</td>
+                     <td>{{item.role}}</td>
+                     <td>{{lap(item.onOFF)}}</td>
+                     <td><button (click)="delUser(item.userId)">delete</button>
+                     </td>
+                 </tr>
+               </ng-container>
+             </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-left: 60%;">
+      <pagination-controls (pageChange)="p = $event" class="float-right"></pagination-controls>
+    </div>
+  </div>
+</section>

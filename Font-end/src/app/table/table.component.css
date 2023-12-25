@@ -1,0 +1,65 @@
+html,
+body,
+.intro {
+  height: 100%;
+}
+
+table td,
+table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card {
+  border-radius: .5rem;
+}
+
+.table-scroll {
+  border-radius: .5rem;
+}
+
+thead {
+  top: 0;
+  position: sticky;
+}
+.sticky{
+  position: sticky;
+}
+
+#myA{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bigdiv{
+  width: 50%;
+
+}
+.div1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.div1A{
+  background-color: black;
+  width: 50%;
+  text-align: center;
+}
+.p-1{
+  color: whitesmoke;
+}
+.pt-3{
+  display: flex;
+  justify-content: center;
+}
+.input-field{
+  width: 50%;
+}
+.div3A{
+  display: flex;
+  justify-content: center;
+}
+button{
+  margin-right: 20px;
+}

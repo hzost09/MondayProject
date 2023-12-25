@@ -1,0 +1,36 @@
+#myA{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bigdiv{
+  width: 50%;
+
+}
+.div1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.div1A{
+  background-color: black;
+  width: 50%;
+  text-align: center;
+}
+.p-1{
+  color: whitesmoke;
+}
+.pt-3{
+  display: flex;
+  justify-content: center;
+}
+.input-field{
+  width: 50%;
+}
+.div3A{
+  display: flex;
+  justify-content: center;
+}
+button{
+  margin-right: 20px;
+}
