@@ -8,10 +8,10 @@ this website is build for control time-table for user by using Angular (basic) ,
 
 
 ## Feature
-    •	Admin Role:
+    Admin Role:
         + View list of users , delete user and seeing which user are online right now.
 
-    •   User Role:
+    User Role:
         + Authentication: login, signup, reset password.
         + Security: JWT and refresh tokens for secure authentication.
         + Create time
